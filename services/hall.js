@@ -3,7 +3,7 @@ const halls = require("../models/hall");
 const seats = require("../models/seats")
 
 
-const createHall=(hall,callback)=>{
+const createEvent=(hall,callback)=>{
  halls.create(hall).then(addedhall=>{
     for (i=0;i<addedhall.nrows;i++){
         for (j=0;j<addedhall.ncols;j++){
@@ -19,4 +19,4 @@ const createHall=(hall,callback)=>{
 })
 };
 
-module.exports={createHall};
+module.exports={createEvent};

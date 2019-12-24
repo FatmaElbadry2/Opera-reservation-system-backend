@@ -23,13 +23,21 @@ router.post('/createHall',passport.authenticate('jwt',{session:false}),ManagerRo
         ncols:req.body.cols
     };
     
-    hallservices.createHall(hall,(newhall)=>{
-        res.json({
-            message:"your hall is created successfully"
-        })
-
-    })   
+    halls.create(hall).then(added=>{
+        res.json(hall)
+    })
+   
 });
+
+
+router.get('/getHalls',passport.authenticate('jwt',{session:false}),ManagerRoles([2]),(req,res)=>{
+    halls.findAll().then(halls=>{
+        res.json(halls)
+    })
+})
+
+
+
 
 
 
