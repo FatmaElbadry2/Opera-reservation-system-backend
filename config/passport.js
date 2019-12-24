@@ -33,12 +33,14 @@ module.exports.Roles = (roles) => {
 
 
 
-module.exports.CustomerRoles = (roles) => {
+module.exports.ManagerRoles = (roles) => {
     return (req, res, next) => {
-        if (roles.indexOf(req.user.role) > -1){
+        if (req.user.role ==2){
             return next()
         }else{
-            res.status(401).json({error: 'You are not authorized to view this content'});
+            res.status(401).json({error: 'You are not authorized to view this content',
+        message:String(req.user.role)
+    });
             return next("Unauth")
         }
     }

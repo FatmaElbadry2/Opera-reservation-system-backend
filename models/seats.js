@@ -7,9 +7,9 @@ class Seats extends Model {
 
 Seats.init({
     number: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         allowNull: false,
-        unique: true
+        unique: false
     },
 }, {
     sequelize: db,
