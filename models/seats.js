@@ -1,7 +1,8 @@
 const {Model, DataTypes} = require('sequelize');
 const db = require("../config/database");
 const hall=require('./hall');
-const event=require('./event')
+const event=require('./event');
+const user=require('./user');
 
 class Seats extends Model {
 }
@@ -24,4 +25,5 @@ Seats.init({
 
 
 Seats.belongsTo(event);
+Seats.belongsTo(user);
 module.exports = Seats;

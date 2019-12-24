@@ -99,9 +99,7 @@ router.post('/updateAuthority',passport.authenticate('jwt', {session: false}),Ro
     userservices.updateAuthority(data.id,data.role,(user)=>{
         return res.json(user)
     })
-    // userservices.updateAuthority(data.id,data.authority).then(()=>{return res.json({
-    //     message:"updated successfully"
-    // })})
+   
 });
 
 router.post('/deleteAccount',passport.authenticate('jwt', {session: false}),Roles([0]), (req,res)=>{
@@ -113,6 +111,36 @@ router.post('/deleteAccount',passport.authenticate('jwt', {session: false}),Role
             message:"deleted successfully"
         })
     })
+});
+
+
+router.post('/updateUser',passport.authenticate('jwt', {session: false}), (req,res)=>{
+    let data={
+        username: req.body.username,
+        password: req.body.password,
+        firstname:req.body.firstname,
+        lastname:req.body.lastname,
+        birthdate:req.body.birthdate,
+        gender:req.body.gender,
+        city:req.body.city,
+        address:req.body.address,
+        email:req.body.email
+    };
+   user.findOne({where:{id:req.user.dataValues.id}}).then(found=>{
+    found.update({
+        username: data.username,
+        password: data.password,
+        firstname:data.firstname,
+        lastname:data.lastname,
+        birthdate:data.birthdate,
+        gender:data.gender,
+        city:data.city,
+        address:data.address,
+        email:data.email
+    }).then(found=>{
+        res.json(found)
+    })
+   })
 });
 
 
