@@ -94,11 +94,14 @@ router.get('/getAll',passport.authenticate('jwt', {session: false}),Roles([0]), 
 router.post('/updateAuthority',passport.authenticate('jwt', {session: false}),Roles([0]), (req,res)=>{
     let data={
         id:req.body.userId,
-        status:req.body.authority
+        role:req.body.authority
     };
-    userservices.updateAuthority(data.id,data.authority).then(()=>{return res.json({
-        message:"updated successfully"
-    })})
+    userservices.updateAuthority(data.id,data.role,(user)=>{
+        return res.json(user)
+    })
+    // userservices.updateAuthority(data.id,data.authority).then(()=>{return res.json({
+    //     message:"updated successfully"
+    // })})
 });
 
 router.post('/deleteAccount',passport.authenticate('jwt', {session: false}),Roles([0]), (req,res)=>{

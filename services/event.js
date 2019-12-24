@@ -23,23 +23,6 @@ const createEvent=(event,callback)=>{
         })
 
     })
-
-    // events.create(event).then(added=>{
-    //     console.log(added);
-    //     halls.findOne({where:{number:added.hallnumber}}).then(found=>{
-    //         for (i=0;i<found.nrows;i++){
-    //             for (j=0;j<found.ncols;j++){
-    //                 let seat={
-    //                     number:String(i)+","+String(j),
-    //                     eventid:event.id
-    //                 }
-    //                 seats.create(seat)
-    //               }
-    //         }        
-    //     }).then(added=>{
-    //         callback(added)
-    //     })
-    // })
 };
 
 module.exports={createEvent};

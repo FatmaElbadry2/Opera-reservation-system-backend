@@ -34,8 +34,4 @@ router.get('/getAllEvents',(req,res)=>{
     })
 })
 
-
-
-
-
 module.exports=router;
