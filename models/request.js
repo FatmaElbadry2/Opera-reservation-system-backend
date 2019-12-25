@@ -21,5 +21,7 @@ Request.init({
 });
 
 
-Request.belongsTo(user);
+Request.belongsTo(user,{
+    onDelete:'CASCADE'
+});
 module.exports = Request;

@@ -19,8 +19,8 @@ const createEvent=(event,callback)=>{
                     }
             }   
         }).then(added=>{
-            callback(added)
-        })
+            callback(added);
+        });
 
     })
 };
