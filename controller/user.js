@@ -70,7 +70,7 @@ router.post('/login', (req,res) => {
                         expiresIn: 604800
                     });
                 return res.json({
-                    token: "JWT " + token,
+                    token: token,
                     role:user.role
                 })
             }else{
