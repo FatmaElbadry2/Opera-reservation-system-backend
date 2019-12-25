@@ -20,12 +20,7 @@ router.post('/createRequest',passport.authenticate('jwt',{session:false}),(req,r
     };
     requestservices.createRequest(request.UserId,request.role,found=>{
         res.json(found)
-    });
-    // requests.create(request).then(returned=>{
-    //     res.json(returned);
-    // }).catch(err=>{
-    //     err.errors
-    // });    
+    });  
 });
 
 

@@ -24,6 +24,6 @@ Seats.init({
 });
 
 
-Seats.belongsTo(event);
+Seats.belongsTo(event,{onDelete:'CASCADE'});
 Seats.belongsTo(user);
 module.exports = Seats;

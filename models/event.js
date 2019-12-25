@@ -36,5 +36,5 @@ Events.init({
     modelName: "Events"
 });
 
-Events.belongsTo(hall);
+Events.belongsTo(hall,{onDelete:'CASCADE'});
 module.exports = Events;

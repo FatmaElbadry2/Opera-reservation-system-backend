@@ -18,10 +18,12 @@ const createEvent=(event,callback)=>{
                     seats.create(seat)
                     }
             }   
-        }).then(added=>{
-            callback(added)
-        })
+        }).then(event=>{
+            callback(event);
+        });
 
+    }).catch(err=>{
+        callback(err);
     })
 };
 

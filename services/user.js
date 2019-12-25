@@ -25,22 +25,30 @@ const registerUser = (user, callback) => {
 
 
 const updateAuthority=(userid,authority,callback)=>{
-    User.findOne({where:{id:userid}}).then(user=>{user.update({
+    User.findOne({where:{id:userid}}).then(user=>{
+        if (user!=null){
+        user.update({
         role: authority
       }).then(user=>{callback(user)}).catch(err=>{
           callback(err);
       })
-    })
+ }
+else{
+callback({message:"user not found"})
+} })
     };
 
  const removeUser=(name,callback)=>{
      User.findOne({where:{username:name}}).then(user=>{
+         if (user !=null){
          user.destroy().then(destroyed=>{
              callback(destroyed)
          }).catch(err=>{
              callback(err)
          });
-     });
+  }else{
+    callback({message:"user not found"})
+  } });
 
  };   
 

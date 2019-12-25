@@ -20,10 +20,9 @@ router.post('/createEvent',passport.authenticate('jwt',{session:false}),ManagerR
         hallnumber:req.body.hallnumber
         
     };
-    eventservices.createEvent(event,addedevent=>{
-        res.json({
-            message:"your event is added successfully"
-        })
+    eventservices.createEvent(event,(addedevent)=>{
+        res.json(
+            addedevent)
     })      
 });
 

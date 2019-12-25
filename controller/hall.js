@@ -25,6 +25,8 @@ router.post('/createHall',passport.authenticate('jwt',{session:false}),ManagerRo
     
     halls.create(hall).then(added=>{
         res.json(hall)
+    }).catch(err=>{
+        res.json(err)
     })
    
 });
