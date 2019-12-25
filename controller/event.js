@@ -9,7 +9,20 @@ const ManagerRoles=require("../config/passport").ManagerRoles
 const event=require("../models/event")
 const eventservices=require("../services/event")
 
-router.post('/createEvent',passport.authenticate('jwt',{session:false}),ManagerRoles([2]),(req,res)=>{
+
+var storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, 'uploads')
+    },
+    filename: function (req, file, cb) {
+      cb(null, file.fieldname + '-' + Date.now())
+    }
+  })
+   
+  var upload = multer({ storage: storage })
+
+
+router.post('/createEvent',passport.authenticate('jwt',{session:false}),ManagerRoles([2]),upload.single('poster'),(req,res)=>{
 
     let event={
         name:req.body.name,
@@ -17,12 +30,12 @@ router.post('/createEvent',passport.authenticate('jwt',{session:false}),ManagerR
         date:req.body.date,
         starttime:req.body.starttime,
         endtime:req.body.endtime,
+        poster:req.file,
         hallnumber:req.body.hallnumber
         
     };
-    eventservices.createEvent(event,(addedevent)=>{
-        res.json(
-            addedevent)
+    eventservices.createEvent(event,addedevent=>{
+        res.json(addedevent)
     })      
 });
 

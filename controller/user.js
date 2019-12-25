@@ -125,6 +125,12 @@ router.post('/deleteAccount',passport.authenticate('jwt', {session: false}),Role
 });
 
 
+router.get('/getUser',passport.authenticate('jwt', {session: false}), (req,res)=>{
+    user.findOne({where:{id:req.user.dataValues.id}}).then(added=>{
+        res.json(added)
+    })
+})
+
 router.post('/updateUser',passport.authenticate('jwt', {session: false}), (req,res)=>{
     let data={
         username: req.body.username,

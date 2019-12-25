@@ -56,6 +56,29 @@ router.get('/viewMyReservations',passport.authenticate('jwt',{session:false}),(r
 });
 
 
+
+router.get('/viewMyEvents',passport.authenticate('jwt',{session:false}),(req,res)=>{
+    
+    seats.findAll({where:{status:true,UserId:req.user.dataValues.id}}).then(myseats=>{
+        myevents=[]
+        for (var x in myseats){
+            //console.log(myseats[x])
+            event.findOne({where:{id:myseats[x].EventId}}).then(found=>{
+                myevents.push(found); 
+            })
+                
+        }
+
+        uniqueEvents=Array.from(new Set (myevents))
+        console.log("plaeeeese",myevents);
+
+        res.json({events:uniqueEvents,seats:myseats})
+    });
+});
+
+
+
+
 router.post('/cancelReservation',passport.authenticate('jwt',{session:false}),(req,res)=>{
     let seat={
         number:req.body.number,
