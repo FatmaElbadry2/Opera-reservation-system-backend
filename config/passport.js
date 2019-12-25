@@ -20,7 +20,7 @@ module.exports.Auth = (passport) => {
 
 module.exports.Roles = (roles) => {
     return (req, res, next) => {
-        if (roles.indexOf(req.user.role) == 0){
+        if (req.user.role == 0){
             return next()
         }else{
             res.status(401).json({error: 'You are not authorized to view this content'});

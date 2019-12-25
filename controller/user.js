@@ -54,7 +54,8 @@ router.post('/login', (req,res) => {
    // console.log("from get user",data);
     
    user.findOne({where: {username: data.username}}).then(user => {
-        console.log("from get user",user.password);
+       if (user!=null){
+        console.log("from get user",user);
         comparePassword(data.password,user.password, (err, isMatched) => {
             console.log("from compare",isMatched);
             if (err) throw err;
@@ -69,7 +70,8 @@ router.post('/login', (req,res) => {
                         expiresIn: 604800
                     });
                 return res.json({
-                    token: "JWT " + token
+                    token: "JWT " + token,
+                    role:user.role
                 })
             }else{
                 return res.json({
@@ -77,7 +79,14 @@ router.post('/login', (req,res) => {
                 })
             }
         })
-    }).catch(err => {
+    }
+    else{
+        return res.json({
+            message:"This user name doesn't exist"
+        })
+    }}
+
+).catch(err => {
         return res.json(err.errors)
     })
 
@@ -87,6 +96,8 @@ router.post('/login', (req,res) => {
 router.get('/getAll',passport.authenticate('jwt', {session: false}),Roles([0]), (req,res)=>{
     user.findAll().then(users => {
         return res.json(users)
+    }).catch(err=>{
+        return res.json(err.errors)
     })
 });
 

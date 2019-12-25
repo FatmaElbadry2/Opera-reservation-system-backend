@@ -18,10 +18,14 @@ router.post('/createRequest',passport.authenticate('jwt',{session:false}),(req,r
         role:req.body.role,
         status:0
     };
-    
-    requests.create(request).then(returned=>{
-        res.json(returned);
-    });    
+    requestservices.createRequest(request.UserId,request.role,found=>{
+        res.json(found)
+    });
+    // requests.create(request).then(returned=>{
+    //     res.json(returned);
+    // }).catch(err=>{
+    //     err.errors
+    // });    
 });
 
 
@@ -41,7 +45,7 @@ router.post('/respond',passport.authenticate('jwt',{session:false}),Roles([0]),(
 
     requestservices.editstatus(request.status,request.userId,(request)=>{
 
-        if (request.status==1){  //accepted
+        if ( request.status==1){  //accepted
             
             userservices.updateAuthority(request.UserId,request.role,(user)=>{
                 return res.json(user)
