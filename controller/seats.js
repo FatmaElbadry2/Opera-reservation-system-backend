@@ -57,24 +57,37 @@ router.get('/viewMyReservations',passport.authenticate('jwt',{session:false}),(r
 
 
 
-router.get('/viewMyEvents',passport.authenticate('jwt',{session:false}),(req,res)=>{
+
+
+// router.get('/viewMyEvents',passport.authenticate('jwt',{session:false}),(req,res)=>{
     
-    seats.findAll({where:{status:true,UserId:req.user.dataValues.id}}).then(myseats=>{
-        myevents=[]
-        for (var x in myseats){
-            //console.log(myseats[x])
-            event.findOne({where:{id:myseats[x].EventId}}).then(found=>{
-                myevents.push(found); 
-            })
+//     seats.findAll({where:{status:true,UserId:req.user.dataValues.id}}).then(myseats=>{
+//         myevents=[]
+//         for (var x in myseats){
+//             //console.log(myseats[x])
+//             event.findOne({where:{id:myseats[x].EventId}}).then(found=>{
+//                 myevents.push(found); 
+//             })
                 
-        }
+//         }
 
-        uniqueEvents=Array.from(new Set (myevents))
-        console.log("plaeeeese",myevents);
+//         uniqueEvents=Array.from(new Set (myevents))
+//         console.log("plaeeeese",myevents);
 
-        res.json({events:uniqueEvents,seats:myseats})
-    });
-});
+//         res.json({events:uniqueEvents,seats:myseats})
+//     });
+// });
+
+
+// router.get('/viewMyEvents',passport.authenticate('jwt',{session:false}),
+
+// (req,res)=>{
+//     event.findAll({
+//         include: [{model:Seats, where:{UserId:req.user.dataValues.id}}]
+//     }).then(found=>{
+//         res.json(found)
+//     });
+// });
 
 
 

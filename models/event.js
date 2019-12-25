@@ -2,6 +2,9 @@ const {Model, DataTypes} = require('sequelize');
 const db = require("../config/database");
 const hall=require('./hall');
 
+
+
+
 class Events extends Model {
 }
 
@@ -37,4 +40,5 @@ Events.init({
 });
 
 Events.belongsTo(hall,{onDelete:'CASCADE'});
+//Events.hasMany(Seats,{through:EventId});
 module.exports = Events;

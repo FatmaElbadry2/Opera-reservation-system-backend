@@ -22,7 +22,7 @@ var storage = multer.diskStorage({
   var upload = multer({ storage: storage })
 
 
-router.post('/createEvent',passport.authenticate('jwt',{session:false}),ManagerRoles([2]),upload.single('poster'),(req,res)=>{
+router.post('/createEvent',passport.authenticate('jwt',{session:false}),ManagerRoles([2]),(req,res)=>{
 
     let event={
         name:req.body.name,
@@ -30,7 +30,7 @@ router.post('/createEvent',passport.authenticate('jwt',{session:false}),ManagerR
         date:req.body.date,
         starttime:req.body.starttime,
         endtime:req.body.endtime,
-        poster:req.file,
+        
         hallnumber:req.body.hallnumber
         
     };
@@ -46,4 +46,10 @@ router.get('/getAllEvents',(req,res)=>{
     })
 })
 
+
+router.get('/getEventById',(req,res)=>{
+    event.findOne({where:{id:req.body.eventid}}).then(events=>{
+        res.json(events)
+    })
+})
 module.exports=router;
