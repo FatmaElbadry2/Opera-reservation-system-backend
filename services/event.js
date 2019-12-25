@@ -12,7 +12,7 @@ const createEvent=(event,callback)=>{
             for (i=0;i<hall.nrows;i++){
                 for (j=0;j<hall.ncols;j++){
                     let seat={
-                        number:String(i)+","+String(j),
+                        number:String.fromCharCode(i+41)+String(j),
                         EventId:added.id
                     }
                     seats.create(seat)
